@@ -2,6 +2,6 @@
  * entrypoint for the javascript ray tracer
  */
 
-const basicPPMimage = require('./src/modules/basicPPMimage');
+const basicPPMimage = require('./src/components/ppmCreator/basicPPMimage');
 basicPPMimage();
 
