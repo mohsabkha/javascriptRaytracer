@@ -1,0 +1,23 @@
+{
+  "name": "javascriptraytracer",
+  "version": "1.0.0",
+  "description": "a raytracer built with javasript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohsabkha/javascriptRaytracer.git"
+  },
+  "keywords": [
+    "raytracer",
+    "javascript"
+  ],
+  "author": "mohsabkha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohsabkha/javascriptRaytracer/issues"
+  },
+  "homepage": "https://github.com/mohsabkha/javascriptRaytracer#readme"
+}
