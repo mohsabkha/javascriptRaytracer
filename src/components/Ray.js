@@ -1,4 +1,6 @@
+
 class Ray{
+    
     constructor(vector_0, vector_1){
         this.A = vector_0;
         this.B = vector_1;
@@ -13,7 +15,7 @@ class Ray{
     }
 
     point_at_parameter(t){
-        return this.A.add(this.B.multipliedByScalar(t));
+        return this.origin().add(this.direction().multipliedByScalarInplace(t));
     }
 }
 

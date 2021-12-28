@@ -20,91 +20,97 @@ class Vector3D{
         return this; 
     }
 
-    negative(this){ 
+    negative(){ 
         return new Vector3D((this.e[0])*-1, (this.e[1])*-1, (this.e[2])*-1); 
     }
 
-    negativeInplace(this){
+    negativeInplace(){
         (this.e[0]*=-1);
         (this.e[1]*=-1);
         (this.e[2]*=-1);
+        return this;
     }
 
-    add(this, v1){ 
+    add(v1){ 
         return new Vector3D(this.e[0]+v1.e[0], this.e[1]+v1.e[1], this.e[2]+v1.e[2]);
     }
 
-    addInplace(this, v1){
+    addInplace(v1){
         this.e[0]+=v1.e[0];
         this.e[1]+=v1.e[1];
         this.e[2]+=v1.e[2];
+        return this;
     }
 
-    subtract(this, v1){ 
+    subtract(v1){ 
         return new Vector3D(this.e[0]-v1.e[0], this.e[1]-v1.e[1], this.e[2]-v1.e[2]);
     }
 
-    subtractInplace(this, v1){
+    subtractInplace(v1){
         this.e[0]-=v1.e[0];
         this.e[1]-=v1.e[1];
         this.e[2]-=v1.e[2];
+        return this;
     }
 
-    accessArray(this,index){ 
+    accessArray(index){ 
         return this.e[index]; 
     }
 
-    multiply(this, v1){ 
+    multiply(v1){ 
         return new Vector3D(this.e[0]*v1.e[0], this.e[1]*v1.e[1], this.e[2]*v1.e[2]);
     }
 
-    multiplyInplace(this,v1){
+    multiplyInplace(v1){
         this.e[0]*=v1.e[0];
         this.e[1]*=v1.e[1];
         this.e[2]*=v1.e[2];
+        return this;
     }
 
-    multipliedByScalar(this, scalar){ 
+    multipliedByScalar(scalar){ 
         return new Vector3D(this.e[0]*scalar, this.e[1]*scalar, this.e[2]*scalar);
     }
 
-    multipliedByScalarInplace(this, scalar){
+    multipliedByScalarInplace(scalar){
         this.e[0]*=scalar;
         this.e[1]*=scalar;
         this.e[2]*=scalar;
+        return this;
     }
 
-    divide(this, v1){ 
+    divide(v1){ 
         return new Vector3D(this.e[0]/v1.e[0], this.e[1]/v1.e[1], this.e[2]/v1.e[2]);
     }
 
-    divideInplace(this, v1){
+    divideInplace(v1){
         this.e[0]/=v1.e[0];
         this.e[1]/=v1.e[1];
         this.e[2]/=v1.e[2];
-
+        return this;
     }
 
-    dividedByScalar(this,scalar){ 
+    dividedByScalar(scalar){ 
         return new Vector3D(this.e[0]/scalar, this.e[1]/scalar, this.e[2]/scalar);
     }
 
-    dividedByScalarInplace(this, scalar){
+    dividedByScalarInplace(scalar){
         this.e[0]/=scalar;
         this.e[1]/=scalar;
         this.e[2]/=scalar;
+        return this;
     }
 
-    length(this){ 
+    length(){ 
         return Math.sqrt((this.e[0]*this.e[0]) + (this.e[1]*this.e[1]) + (this.e[2]*this.e[2])); 
     }
 
-    squaredLength(this){ 
+    squaredLength(){ 
         return (this.e[0]*this.e[0]) + (this.e[1]*this.e[1]) + (this.e[2]*this.e[2]); 
     }
 
-    unitVector(vector_){
-        return vector_.dividedByScalarInplace(vector_.length())
+    unitVector(){
+        return this.dividedByScalar(this.length())
     }
 
     makeUnitVector(){ 
@@ -112,15 +118,16 @@ class Vector3D{
         this.e[0] *= k;
         this.e[1] *= k;
         this.e[2] *= k;
+        return this;
     }
 
     
 
-    dotProduct(this, v1){ 
+    dotProduct(v1){ 
         return (this.e[0]*v1.e[0] + this.e[1]*v1.e[1] + this.e[2]*v1.e[2])
     }
 
-    crossProduct(this, v1){ 
+    crossProduct(v1){ 
         return new Vector3D(
             (this.e[1]*v1.e[2] - this.e[2]*v1.e[1]),
             (this.e[0]*v1.e[2] - this.e[2]*v1.e[0]),
@@ -128,11 +135,11 @@ class Vector3D{
         )
     }
 
-    inputStream(path, this){
+    inputStream(path){
         fs.writeFileSync(path,`P3\n` + `${imageSizeX} ${imageSizeY}` + `\n255\n`, err => {});
     }
 
-    outputStream(path, this){
+    outputStream(path){
         fs.writeFileSync(path,`P3\n` + `${imageSizeX} ${imageSizeY}` + `\n255\n`, err => {});
     }
 }
