@@ -1,8 +1,8 @@
 // node fs module used for writing files
 const fs = require('fs');
 const Ray = require('../Ray');
-const Vector3D = require('../Vector3D');
-const color = require('./../color');
+const Vector3D = require('../Vector/Vector3D');
+const rayColor = require('../../modules/rayColor');
 
 const basicPPMimage = () => {
     let aspectRatio = 16/9;
@@ -25,6 +25,8 @@ const basicPPMimage = () => {
     fs.writeFileSync(`img.ppm`,`P3\n` + `${imageWidth} ${imageHeight}` + `\n255\n`, err => {});
     // creating the rows
     for(let j = imageHeight-1; j >= 0; --j){
+        process.stdout.write(`Completion: ${(((imageHeight-j)/imageHeight)*100).toFixed(1)}%`);
+
         // iterating over every column in the row and generating pixel
         for(let i = 0; i < imageWidth; ++i){
             let u = i / (imageWidth - 1);
@@ -33,7 +35,7 @@ const basicPPMimage = () => {
             let sv = vertical.multipliedByScalar(v);
             let rayVector = lowerLeftCorner.add(sh.add(sv));
             let ray = new Ray(origin, (rayVector.subtract(origin)));
-            let col = color(ray);
+            let col = rayColor(ray);
             
             let r = Math.floor(255.999*col.x());
             let g = Math.floor(255.999*col.y());
@@ -41,7 +43,9 @@ const basicPPMimage = () => {
             // writing pixel to ppm file
             fs.writeFileSync(`img.ppm`, `${r} ${g} ${b}\n`, { flag: 'a' }, err => {});
         }
+        process.stdout.cursorTo(0);
     }
+    process.stdout.write('\n')
 }
 
 module.exports = basicPPMimage;
