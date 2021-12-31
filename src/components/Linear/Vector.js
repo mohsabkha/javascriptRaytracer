@@ -30,10 +30,14 @@ class Vector{
         }
         return Math.sqrt(squaredSum);
     }
+    //dot product
     multiply(vector){
         let sum = 0;
         this.components.map((el ,index) => {sum += (el * vector.components[index])});
         return sum;
+    }
+    squared(){
+        return (this.magnitude*this.magnitude);
     }
     divide(vector){
         
