@@ -137,7 +137,7 @@ class Matrix{
 
     multiplyByScalar(t){
         let buffer = new Matrix();
-        buffer.entries = new Array(this.entries.length).fill([]);
+        buffer.entries = new Array(this.entries.length);
         let vector = [];
         for(let i = 0; i < this.entries.length; i++){
             for(let j = 0; j < this.entries.length; j++){
@@ -160,7 +160,7 @@ class Matrix{
 
     divideByScalar(t){
         let buffer = new Matrix();
-        buffer.entries = new Array(this.entries.length).fill(new Array());
+        buffer.entries = new Array(this.entries.length);
         let vector = [];
         for(let i = 0; i < this.entries.length; i++){
             for(let j = 0; j < this.entries.length; j++){
