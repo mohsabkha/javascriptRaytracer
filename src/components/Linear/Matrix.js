@@ -111,7 +111,7 @@ class Matrix{
         let newVectorArray = [];
         for(let i = 0; i < this.entries.length; i++){
             for(let j = 0; j < this.entries.length; j++){
-                newVectorArray.push(this.getRow(i).multiply(matrix.getColumn(j)));
+                newVectorArray.push(this.getRow(i).dotMultiply(matrix.getColumn(j)));
             }
             newEntriesList[i] = (newVectorArray);
             newVectorArray = [];
@@ -188,7 +188,7 @@ class Matrix{
         // create a buffer to hold values
         let buffer = [];
         for(let i = 0; i < this.size; i++){
-            buffer.push(this.getRow(i).multiply(vector));
+            buffer.push(this.getRow(i).dotMultiply(vector));
         }
         let newVector = new Vector(buffer);
         return newVector;

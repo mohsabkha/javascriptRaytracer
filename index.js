@@ -1,14 +1,8 @@
 //const basicPPMimage = require('./src/components/ppmCreator/basicPPMimage');
 const Matrix = require('./src/components/Linear/Matrix');
 const Vector = require('./src/components/Linear/Vector');
-// creates the ray-traced image
+
 // basicPPMimage();
-
-// to observe internals, go to components or modules folder
-
-// The basic ray, color, and location are build using Vector3D class
-// The ray is then further expanded to build the full ray as it comes from the camera
-// didHit function in modules is the template used by the shapes found in hittableObject
 
 let myVector1 = new Vector(1,2);
 let myVector2 = new Vector(4,5);
@@ -29,3 +23,4 @@ myMatrix.print();
 
 let newMatrix = myMat.multiply(myMatrix);
 newMatrix.print();
+console.log(myVec1.crossMultiply(myVec2));

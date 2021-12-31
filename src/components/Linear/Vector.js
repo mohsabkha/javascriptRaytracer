@@ -15,6 +15,12 @@ class Vector{
         else this.components = [];
         this.magnitude = this.length();
     }
+    // return common components
+    x(){return this.components[0]}
+    y(){return this.components[1]}
+    z(){return this.components[2]}
+    w(){return this.components[3]}
+
     //getters and setters for vector components
     get(i){
         return this.components[i];
@@ -31,13 +37,33 @@ class Vector{
         return Math.sqrt(squaredSum);
     }
     //dot product
-    multiply(vector){
+    dotMultiply(vector){
         let sum = 0;
         this.components.map((el ,index) => {sum += (el * vector.components[index])});
         return sum;
     }
     squared(){
         return (this.magnitude*this.magnitude);
+    }
+    crossMultiply(vector){
+        if(vector.components.length !== 3 || this.components.length !== 3 || this.components.length !== vector.components.length){
+            console.error(`Vector Size Incorrect`)
+            return undefined;
+        }
+        let answers = [];
+        answers.push((this.y()*vector.z()) - (this.z()*vector.y()));
+        answers.push((this.z()*vector.x()) - (this.x()*vector.z()));
+        answers.push(((this.x()*vector.y()) - this.y()*vector.x()));
+        return new Vector(answers);
+    }
+    crossMultiplyInPlace(vector){
+        let newVector = this.crossMultiply(vector); 
+        this.components = newVector.components;
+        this.magnitude = newVector.magnitude;
+        return this;
+    }
+    vectorTo(vector){
+        return this.subtract(vector);
     }
     divide(vector){
         
