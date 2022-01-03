@@ -1,10 +1,16 @@
-
+const HitRecord = require('./HitRecord');
 class HittableObject{
-    constructor(ray, tMin, tMax, hitRecords){
-
+    constructor(ray = null, tMin = 0, tMax = 0, hitRecords = null){
+        this.hitRecords = hitRecords;
+        this.ray = ray;
+        this.tMin = tMin;
+        this.tMax = tMax;
     }
-
+    
     didHit(ray, tMin, tMax, hitRecords){
-        return 0;
+        this.hitRecords = hitRecords;
+        this.ray = ray;
+        this.tMin = tMin;
+        this.tMax = tMax;
     }
 }
