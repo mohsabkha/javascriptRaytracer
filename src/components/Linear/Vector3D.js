@@ -2,7 +2,7 @@ const fs = require('fs');
 
 class Vector3D{
     constructor(){
-        if(arguments[0] instanceof Array && arguments[0].length === 3){
+        if(typeof(arguments[0]) === 'object' && arguments[0].length === 3){
             this.e = arguments[0];
         }
         else if(arguments.length === 3){
@@ -10,6 +10,10 @@ class Vector3D{
             this.e[0] = arguments[0];
             this.e[1] = arguments[1];
             this.e[2] = arguments[2];
+        }
+        else{
+            console.log(typeof(arguments));
+            console.log(typeof(arguments[0]));
         }
         
     }

@@ -14,6 +14,7 @@ const basicPPMimage = () => {
     let viewportWidth = aspectRatio * viewportHeight;
     let focalLength = 1.0;
 
+    // create the camera and its movemennt
     // two offset vectors to help calculate camera direction
     let horizontal = new Vector3D(viewportWidth, 0.0, 0.0);
     let vertical = new Vector3D(0.0,viewportHeight,0.0);
@@ -28,7 +29,6 @@ const basicPPMimage = () => {
     fs.writeFileSync(`img.ppm`,`P3\n` + `${imageWidth} ${imageHeight}` + `\n255\n`, err => {});
     // creating the rows
     for(let j = imageHeight-1; j >= 0; --j){
-        // set up progress
         process.stdout.write(`Completion: ${(((imageHeight-j)/imageHeight)*100).toFixed(1)}%`);
         // iterating over every column in the row and generating pixel
         for(let i = 0; i < imageWidth; ++i){
@@ -45,7 +45,7 @@ const basicPPMimage = () => {
             // generate color vector from the ray and create pixel color from the color vector
             let pixelColor = writeColorToPixel(rayColor(ray))
             // writing pixel to ppm file
-            fs.writeFileSync('img.ppm', pixelColor, { flag: 'a' }, err => {});
+            fs.writeFileSync('img.ppm ' + pixelColor, { flag: 'a' }, err => {});
         }
         process.stdout.cursorTo(0);
     }

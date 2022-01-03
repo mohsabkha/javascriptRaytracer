@@ -1,6 +1,5 @@
 const didHitObject = (center, radius, ray) => {
-    let oc = ray.origin().subtract(center);
-    oc = oc.unitVector();
+    let oc = ray.origin().subtract(center).unitVector();
     let a = ray.direction().squaredLength();
     let halfB = (oc.dotProduct(ray.direction().unitVector()));
     let c = oc.squaredLength() - (radius*radius);

@@ -1,8 +1,8 @@
-// const basicPPMimage = require('./src/components/ppmCreator/basicPPMimage');
+const basicPPMimage = require('./src/util/basicPPMimage');
 // const Matrix = require('./src/components/Linear/Matrix');
 // const Vector = require('./src/components/Linear/Vector');
 
-// basicPPMimage();
+basicPPMimage();
 
 // let myVector1 = new Vector(1,2);
 // let myVector2 = new Vector(4,5);
