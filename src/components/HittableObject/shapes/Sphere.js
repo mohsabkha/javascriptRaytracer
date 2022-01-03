@@ -7,11 +7,10 @@ class Sphere extends HittableObject{
         super();
         this.center = center;
         this.radius = radius;
-        this.hitRecord = new HitRecord();
     }
 
     //function to determinee if the sphere is hit
-    didHit(ray, tMin, tMax, hitRecords){
+    didHit(tMin, tMax, hitRecords, ray){
         let oc = ray.origin().subtract(this.center);
         let a = ray.direction().squaredLength();
         let halfB = (oc.dotProduct(ray.direction()));
@@ -24,7 +23,7 @@ class Sphere extends HittableObject{
         }
 
         //check if roots exist
-        sqrtDet = Math.sqrt(discriminant);
+        let sqrtDet = Math.sqrt(discriminant);
         let root = (-halfB - sqrtDet ) / a;
         if(root < tMin || root > tMax){
             root = (-halfB - sqrtDet ) / a;
@@ -39,11 +38,11 @@ class Sphere extends HittableObject{
         //a normal is the ray perpendicular to the object which we will see in the camera
         let normal = (point - this.center) / this.radius;
         //update the passed in hit record and return true
-        this.hitRecord.t = root;
-        this.hitRecord.point = point;
-        this.hitRecord.normal = normal;
-        let outwardNormal = (hitRecords.point - this.center) / this.radius;
-        this.hitRecord.setFaceNormal(ray, outwardNormal);
+        hitRecords.t = root;
+        hitRecords.point = point;
+        hitRecords.normal = normal;
+        let outwardNormal = (hitRecords.getPoint().subtract(this.center)).dividedByScalar(this.radius);
+        hitRecords.setFaceNormal(ray, outwardNormal);
 
         //return true when roots exist and hitRecords are updated
         return true;

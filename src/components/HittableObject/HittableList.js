@@ -6,6 +6,9 @@ class HittableList{
         this.objectsList = [];
     }
 
+    getList(){
+        return this.objectsList;
+    }
     add(hittableObject){
         this.objectsList.push(hittableObject);
         this.length++;
@@ -19,7 +22,7 @@ class HittableList{
         let tempHitRecord = new HitRecord;
         let hitAnything = false;
         let closestSoFar = tMax;
-        console.log(Infinit)
+
         this.objectsList.map((el, index) => {
             if(el.didHit(ray, tMin, tMax, tempHitRecord)){
                 hitAnything = true;

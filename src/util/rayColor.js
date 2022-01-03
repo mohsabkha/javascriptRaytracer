@@ -2,25 +2,22 @@ const Vector3D = require('../components/Linear/Vector3D');
 const Point3D = require('./../components/Linear/Vector3DUses/Point3D')
 const Color3D = require('../components/Linear/Vector3DUses/Color3D');
 const didHitObject = require('./didHitObject');
+const HitRecord = require('../components/HittableObject/HitRecord');
 
-const rayColor = (ray) => {
-    record = new HitRecord();
-    if(hittable.didHit(ray, Infinity, record)){
-        return (record.normal.add(new Color3D(1,1,1).multipliedByScalar(0.5)));
+const rayColor = (ray, hittable) => {
+    let record = new HitRecord();
+    for(let i = 0; i < hittable.getList().length; i++){
+        let center = hittable.getList()[i].center;
+        let radius = hittable.getList()[i].radius;
+        if(hittable.getList()[i].didHit(0, Infinity, record, ray)){
+            return new Color3D(1,1,1).add(record.normal).multipliedByScalar(.5);
+        }
+        // let t = (didHitObject(center, radius, ray))
+        // if(t){
+        //     let N = ray.point_at_parameter(t).subtract(center).unitVector();
+        //     return new Color3D(N.x()+1, N.y()+1, N.z()+1).multipliedByScalar(radius);
+        // }
     }
-    // }
-    // // CREATE A SPHERE
-    //     // create a center point where the ray will hit
-    //     let center = new Vector3D(0,0,-1);
-    //     // create a radius for the sphere
-    //     let radius = 0.5;
-    //     // create a t variable for where the hit occurs
-    //     let t = didHitObject(center, radius, ray);
-    //     if (t > 0){
-    //         let N = ray.point_at_parameter(t).subtract(center).unitVector();
-    //         return new Color3D(N.x()+1, N.y()+1, N.z()+1).multipliedByScalar(radius);
-    //     }
-    
 
     // make a unit vector out of the direction of the ray
     let unitDirection = ray.direction().unitVector();

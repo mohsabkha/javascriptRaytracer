@@ -1,7 +1,7 @@
-const Vector3D = require("../Vector/Vector3D");
+const Vector3D = require("./../Linear/Vector3D");
 
 class HitRecord{
-    constructor(point = null, normal = null, t = 0, frontFaceBool = false){
+    constructor(point = new Vector3D(), normal = new Vector3D(), t = 0, frontFaceBool = false){
         this.point = point;
         this.normal = normal;
         this.t = t;
@@ -9,8 +9,12 @@ class HitRecord{
     }
 
     setFaceNormal(ray, outwardsNormal){
-        this.frontFaceBool = ray.direction.dotProduct(outwardsNormal) < 0;
-        normal = this.frontFaceBool ? outwardsNormal : -outwardsNormal; 
+        this.frontFaceBool = ray.direction().dotProduct(outwardsNormal) < 0;
+        this.normal = this.frontFaceBool ? outwardsNormal : outwardsNormal.negative(); 
+    }
+
+    getPoint(){
+        return this.point;
     }
 }
 

@@ -12,9 +12,13 @@ class Vector3D{
             this.e[2] = arguments[2];
         }
         else{
-            console.log(typeof(arguments));
-            console.log(typeof(arguments[0]));
+            this.e = [];
+            this.e.push(0);
+            this.e.push(0);
+            this.e.push(0);
         }
+        
+    
         
     }
     // access methods

@@ -5,9 +5,8 @@ const didHitObject = (center, radius, ray) => {
     let c = oc.squaredLength() - (radius*radius);
 
     let discriminant = (halfB * halfB) - (a*c);
-    
     if(discriminant < 0){
-        return -1;
+        return false;
     }
     else{
         return (-halfB - Math.sqrt(discriminant) ) / a;
