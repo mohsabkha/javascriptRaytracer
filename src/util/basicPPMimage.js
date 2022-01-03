@@ -4,6 +4,7 @@ const Ray = require('./../components/Ray');
 const Vector3D = require('./../components/Linear/Vector3D');
 const rayColor = require('./../util/rayColor');
 const writeColorToPixel = require('./writeColorToPixel');
+const HittableList = require('./../components/HittableObject/HittableList');
 
 const basicPPMimage = () => {
     // create the viewport and the image
@@ -13,6 +14,11 @@ const basicPPMimage = () => {
     let viewportHeight = 2.0;
     let viewportWidth = aspectRatio * viewportHeight;
     let focalLength = 1.0;
+
+    // create world
+    let world = new HittableList()
+    world.add(new Vector3D(0,0,-1), 0.5);
+    world.add(new Vector3D(0,-100.5,-1), 100);
 
     // two offset vectors to help calculate camera direction
     let horizontal = new Vector3D(viewportWidth, 0.0, 0.0);
@@ -43,7 +49,7 @@ const basicPPMimage = () => {
             // createe the ray and invert it to the top left of the screen
             let ray = new Ray(origin, (rayVector.subtract(origin)));
             // generate color vector from the ray and create pixel color from the color vector
-            let pixelColor = writeColorToPixel(rayColor(ray))
+            let pixelColor = writeColorToPixel(rayColor(ray, world))
             // writing pixel to ppm file
             fs.writeFileSync('img.ppm', pixelColor, { flag: 'a' }, err => {});
         }

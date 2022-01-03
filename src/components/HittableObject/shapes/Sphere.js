@@ -1,3 +1,4 @@
+const HitRecord = require('../HitRecord');
 const HittableObject = require('../HittableObject');
 
 //hittableObject creates an extendable base object that can be transformed
@@ -6,7 +7,7 @@ class Sphere extends HittableObject{
         super();
         this.center = center;
         this.radius = radius;
-
+        this.hitRecord = new HitRecord();
     }
 
     //function to determinee if the sphere is hit
@@ -38,11 +39,11 @@ class Sphere extends HittableObject{
         //a normal is the ray perpendicular to the object which we will see in the camera
         let normal = (point - this.center) / this.radius;
         //update the passed in hit record and return true
-        hitRecords.t = root;
-        hitRecords.point = point;
-        hitRecords.normal = normal;
+        this.hitRecord.t = root;
+        this.hitRecord.point = point;
+        this.hitRecord.normal = normal;
         let outwardNormal = (hitRecords.point - this.center) / this.radius;
-        hitRecords.setFaceNormal(ray, outwardNormal);
+        this.hitRecord.setFaceNormal(ray, outwardNormal);
 
         //return true when roots exist and hitRecords are updated
         return true;

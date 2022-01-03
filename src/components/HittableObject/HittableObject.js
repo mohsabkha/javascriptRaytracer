@@ -14,3 +14,5 @@ class HittableObject{
         this.tMax = tMax;
     }
 }
+
+module.exports = HittableObject;
