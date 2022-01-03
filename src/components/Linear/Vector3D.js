@@ -1,11 +1,17 @@
 const fs = require('fs');
 
 class Vector3D{
-    constructor(e0=0, e1=0, e2=0){
-        this.e = new Array(3);
-        this.e[0] = e0;
-        this.e[1] = e1;
-        this.e[2] = e2;
+    constructor(){
+        if(arguments[0] instanceof Array && arguments[0].length === 3){
+            this.e = arguments[0];
+        }
+        else if(arguments.length === 3){
+            this.e = new Array(3);
+            this.e[0] = arguments[0];
+            this.e[1] = arguments[1];
+            this.e[2] = arguments[2];
+        }
+        
     }
     // access methods
     x(){ return this.e[0]; }
@@ -53,7 +59,7 @@ class Vector3D{
         return this;
     }
 
-    accessArray(index){ 
+    getValueAt(index){ 
         return this.e[index]; 
     }
 
@@ -113,7 +119,7 @@ class Vector3D{
         return this.dividedByScalar(this.length())
     }
 
-    makeUnitVector(){ 
+    unitVectorInPlace(){ 
         let k = 1 / this.length();
         this.e[0] *= k;
         this.e[1] *= k;
@@ -122,7 +128,6 @@ class Vector3D{
     }
 
     
-
     dotProduct(v1){ 
         return (this.e[0]*v1.e[0] + this.e[1]*v1.e[1] + this.e[2]*v1.e[2])
     }
