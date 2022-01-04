@@ -1,4 +1,3 @@
-const HitRecord = require('./HitRecord');
 class HittableObject{
     constructor(ray = null, tMin = 0, tMax = 0, hitRecords = null){
         this.hitRecords = hitRecords;

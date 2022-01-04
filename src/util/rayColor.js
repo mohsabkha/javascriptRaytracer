@@ -3,22 +3,31 @@ const Point3D = require('./../components/Linear/Vector3DUses/Point3D')
 const Color3D = require('../components/Linear/Vector3DUses/Color3D');
 const didHitObject = require('./didHitObject');
 const HitRecord = require('../components/HittableObject/HitRecord');
+const Ray = require('../components/Ray');
 
-const rayColor = (ray, hittable) => {
+const rayColor = (ray, hittable, depth=100) => {
+    if(depth <= 0){
+        return new Color3D(0,0,0);
+    }
+    depth--;
     let record = new HitRecord();
     for(let i = 0; i < hittable.getList().length; i++){
-        let center = hittable.getList()[i].center;
-        let radius = hittable.getList()[i].radius;
-        if(hittable.getList()[i].didHit(0, Infinity, record, ray)){
-            return new Color3D(1,1,1).add(record.normal).multipliedByScalar(.5);
+        if(hittable.getList()[i].didHit(0.001, Infinity, record, ray)){
+            let newColor = new Color3D(0,0,0);
+            //controls how to surface interacts with light
+            let target = record.getPoint()
+                .add(record.getNormal())
+                .add(newColor.randomUnitVector())
+            //controls objects
+            // multiple -> deep color, add -> light color
+            return rayColor(new 
+                Ray(record.getPoint(), 
+                target.subtract(record.getPoint())), hittable, depth) // shader
+                .multiply(hittable.getList()[i].getColor())
         }
-        // let t = (didHitObject(center, radius, ray))
-        // if(t){
-        //     let N = ray.point_at_parameter(t).subtract(center).unitVector();
-        //     return new Color3D(N.x()+1, N.y()+1, N.z()+1).multipliedByScalar(radius);
-        // }
     }
 
+    //setting up the background gradient
     // make a unit vector out of the direction of the ray
     let unitDirection = ray.direction().unitVector();
     // calculate t between 0 and 1

@@ -1,5 +1,3 @@
-const Point3D = require('./Linear/Vector3DUses/Point3D');
-
 class Ray{
     
     constructor(rayOrigin, rayDirection){

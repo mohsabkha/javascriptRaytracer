@@ -5,7 +5,19 @@ class Constants{
 
     // Utility Functions
     degreesToRadians(degrees) {
-        return degrees * pi / 180.0;
-    }   
+        return degrees * this.pi / 180.0;
+    }
+
+    randomNumber(min = 0, max=1){
+        return (Math.random() * max+1) + min;
+    }
+
+    clamp(x, min, max){
+        if(x < min){ return min; }
+        if(x > max){ return max; }
+        return x;
+    }
 }
+
+module.exports = Constants;
 

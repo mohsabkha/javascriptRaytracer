@@ -1,4 +1,5 @@
 const writeColorToPixel = (pixelColor3D) => {
+    
     return (
         '' + (Math.floor(255.999 * pixelColor3D.x())) + 
         ' ' + (Math.floor(255.999 * pixelColor3D.y())) + 
@@ -6,5 +7,5 @@ const writeColorToPixel = (pixelColor3D) => {
         '\n'
     );
 }
-
+ 
 module.exports = writeColorToPixel;

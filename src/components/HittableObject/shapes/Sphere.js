@@ -1,12 +1,13 @@
-const HitRecord = require('../HitRecord');
+const Color3D = require('../../Linear/Vector3DUses/Color3D');
 const HittableObject = require('../HittableObject');
 
 //hittableObject creates an extendable base object that can be transformed
 class Sphere extends HittableObject{
-    constructor(center, radius){
+    constructor(center, radius, color=new Color3D(1,1,1)){
         super();
         this.center = center;
         this.radius = radius;
+        this.color = color
     }
 
     //function to determinee if the sphere is hit
@@ -46,6 +47,10 @@ class Sphere extends HittableObject{
 
         //return true when roots exist and hitRecords are updated
         return true;
+    }
+
+    getColor(){
+        return this.color;
     }
 }
 

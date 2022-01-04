@@ -1,4 +1,6 @@
 const fs = require('fs');
+const Constants = require('../../util/constants');
+let constants = new Constants;
 
 class Vector3D{
     constructor(){
@@ -43,6 +45,22 @@ class Vector3D{
         (this.e[1]*=-1);
         (this.e[2]*=-1);
         return this;
+    }
+
+    randomVector(min=0, max=1){
+        return new Vector3D(constants.randomNumber(min,max), constants.randomNumber(min,max), constants.randomNumber(min,max));
+    }
+
+    randomVectorInUnitSphere(){
+        while(true){
+            let p = this.randomVector(-1,1);
+            if(p.squaredLength() < 1)
+                return p;
+        }
+    }
+
+    randomUnitVector(){
+        return this.randomVectorInUnitSphere().unitVector();
     }
 
     add(v1){ 
@@ -143,7 +161,7 @@ class Vector3D{
     crossProduct(v1){ 
         return new Vector3D(
             (this.e[1]*v1.e[2] - this.e[2]*v1.e[1]),
-            (this.e[0]*v1.e[2] - this.e[2]*v1.e[0]),
+            (this.e[2]*v1.e[0] - this.e[0]*v1.e[2]),
             (this.e[0]*v1.e[1] - this.e[1]*v1.e[0])
         )
     }

@@ -13,6 +13,14 @@ class HitRecord{
         this.normal = this.frontFaceBool ? outwardsNormal : outwardsNormal.negative(); 
     }
 
+    getT(){
+        return this.t;
+    }
+
+    getNormal(){
+        return this.normal;
+    }
+
     getPoint(){
         return this.point;
     }
