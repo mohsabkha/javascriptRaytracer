@@ -63,6 +63,14 @@ class Vector3D{
         return this.randomVectorInUnitSphere().unitVector();
     }
 
+    randomInHemisphere(normal){
+        if(this.randomUnitVector().dotProduct(normal) > 0){
+            return this.randomUnitVector();
+        }
+        else
+            return this.randomUnitVector().multipliedByScalar(-1);
+    }
+
     add(v1){ 
         return new Vector3D(this.e[0]+v1.e[0], this.e[1]+v1.e[1], this.e[2]+v1.e[2]);
     }

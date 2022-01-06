@@ -1,11 +1,8 @@
-const Vector3D = require('../components/Linear/Vector3D');
-const Point3D = require('./../components/Linear/Vector3DUses/Point3D')
 const Color3D = require('../components/Linear/Vector3DUses/Color3D');
-const didHitObject = require('./didHitObject');
 const HitRecord = require('../components/HittableObject/HitRecord');
 const Ray = require('../components/Ray');
 
-const rayColor = (ray, hittable, depth=100) => {
+const rayColor = (ray, hittable, depth=50) => {
     if(depth <= 0){
         return new Color3D(0,0,0);
     }
@@ -13,17 +10,15 @@ const rayColor = (ray, hittable, depth=100) => {
     let record = new HitRecord();
     for(let i = 0; i < hittable.getList().length; i++){
         if(hittable.getList()[i].didHit(0.001, Infinity, record, ray)){
-            let newColor = new Color3D(0,0,0);
-            //controls how to surface interacts with light
+            let newColor = new Color3D();
+            //controls how object's surface interacts with light
             let target = record.getPoint()
-                .add(record.getNormal())
-                .add(newColor.randomUnitVector())
+                .add(newColor.randomInHemisphere(record.getNormal()))
             //controls objects
-            // multiple -> deep color, add -> light color
             return rayColor(new 
                 Ray(record.getPoint(), 
                 target.subtract(record.getPoint())), hittable, depth) // shader
-                .multiply(hittable.getList()[i].getColor())
+                .multiply(hittable.getList()[i].getColor());
         }
     }
 
